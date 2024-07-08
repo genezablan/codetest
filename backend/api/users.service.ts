@@ -33,5 +33,6 @@ export default {
     getAllProfiles,
     getProfileById,
     updateProfileById,
-    deleteProfileById
+    deleteProfileById,
+    createProfile
 }

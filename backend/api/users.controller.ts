@@ -19,17 +19,20 @@ export const getAllProfiles = async (req: Request, res: Response) => {
 
 export const createProfile = async (req: Request, res: Response) => {
     try {
-        const newProfile = new UserProfile(req.body);
-        const profile = await newProfile.save();
+        const profile = await UserService.createProfile(req.body);
         return res.json(profile);
     }catch(err:any) {
-        return res.status(400).send({err: err.message});
+        return res.status(400).send({message: err.message});
     }
 };
 
 export const updateProfile = async (req: Request, res: Response) => {
-    const profile = await UserService.updateProfileById(new mongoose.Types.ObjectId(req.params['id']), req.body);
-    res.send(profile);
+    try {
+        const profile = await UserService.updateProfileById(new mongoose.Types.ObjectId(req.params['id']), req.body);
+        return res.json(profile);
+    }catch(err:any) {
+        return res.status(400).send({message: err.message});
+    }   
 };
   
 export const deleteProfile = async (req: Request, res: Response) => {
